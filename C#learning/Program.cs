@@ -7,27 +7,59 @@ namespace LearningCSharp
     {
         static void Main(string[] args)
         {
-            // nested loops
+            // Number guessing game
 
-            Console.WriteLine("How many rows?: ");
-            int rows = Convert.ToInt32(Console.ReadLine());
+            Random random = new Random();
+            bool playAgain = true;
+            int min = 1;
+            int max = 10;
+            int guess;
+            int guesses;
+            int number;
+            String response;
 
-            Console.WriteLine("How many columns?: ");
-            int columns = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("What symbol?: ");
-            char symbol = Convert.ToChar(Console.ReadLine());
-
-
-            for (int i = 0; i < rows; i++)
+            while ( playAgain)
             {
-                for (int j = 0; j < columns; j++)
+                guess = 0;
+                guesses = 0;
+                number = random.Next(min, max + 1);
+                response = "";
+
+                while ( guess != number )
                 {
-                    Console.Write(symbol);
+                    Console.WriteLine("Guess a number between " + min + "-" + max + " : ");
+                    guess = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Guess: " + guess);
+
+                    if(guess > number)
+                    {
+                        Console.WriteLine(guess + " is too high.");
+                    }
+                    else if (guess < number)
+                    {
+                        Console.WriteLine(guess + " is too low.");
+                    }
+                    guesses++;
                 }
-                Console.WriteLine();
+                Console.WriteLine("Guess: " + guess);
+                Console.WriteLine("Congratulations! You win.");
+                Console.WriteLine("Guesses: " + guesses);
+
+                Console.WriteLine("Do you want to play again (Y/N)?: ");
+                response = Console.ReadLine();
+                response = response.ToUpper();
+
+                if(response == "Y")
+                {
+                    playAgain = true;
+                }
+                else if(response == "N")
+                {
+                    playAgain = false;
+                }
             }
 
+            Console.WriteLine("Thank you for playing the guessing game.");
 
             Console.ReadKey();
         }
